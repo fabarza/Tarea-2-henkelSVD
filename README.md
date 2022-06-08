@@ -45,3 +45,37 @@ Utilizamos la entropia espectral de shannon para identificar si la señal es det
 
 ## Para la tarea:
 * Van a haber 2 funciones distinas para la capa de salida y para las capas ocultas
+  
+# Estructura de los datos
+
+### Data.csv
+Compuesto por M filas x N columnas
+  * N-1 columnas son los datos de entrada
+  * La columna N es la etiqueta numerica
+  * M-filas son el numero de muestras
+
+### Param_prep.csv
+  * Linea 1: N° de segmentos
+  * Linea 2: Longitud del segmento (L)
+  * Linea 3: Número de componentes
+
+### Param_snn.csv
+  * Linea 1: Porcentaje de training
+  * Linea 2: N° Max. Iteraciones
+  * Linea 3: Tasa de aprendizaje
+  * Linea 4: Nodos ocultos de Capa 1
+  * Linea 5: Nodos ocultos de Capa 2
+  * ...
+
+# Como hacer el codigo
+
+* Paso 1: Dividir cada una de las muestras en segmentos de tamaño L.
+* Paso 2: Calcular K (Total de caracteristicas ((N-1)-L+1)
+  * Si dividimos cada muestra en segmentos de tamaño L, y de cada segmento tenemos que sacar J componentes, K=L-j+1 para la matriz kankel del segmento (?)
+* Paso 3: Aplicar el [SVD](https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html) para obtener las matrices U, V^T y S
+* Paso 4: Calcular la entropia para
+  * Cada uno de los componentes obtenidos (Se obtienen J atributos de este proceso)
+  * Para el segmento L (Se obtiene 1 atributo de este proceso)
+    * J+1
+  * Por ultimo, se aplica SVD para calcular los valores singulares de la matriz de componentes obtenidos (J) (?)
+  * Al final deberian obtenerse 2J+1 atributos
