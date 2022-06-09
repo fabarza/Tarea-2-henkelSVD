@@ -46,21 +46,19 @@ def deriva_act(x):
         return tg_h_dv
    
 #Feed-Backward of SNN
-def gradW(...):    
-    ...    
+def gradW():    
+        
     return()    
 
 # Update Ws
-def updW(...):
-    ...    
-    return(...)
+def updW():
+    return
 
 # Measure
 def metricas(x,y):
     return()
     
-#Confusion matrix for
+#Confusion matrix 
 def confusion_matrix(z,y):
-    ...    
     return(cm)
 #-----------------------------------------------------------------------

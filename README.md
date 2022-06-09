@@ -77,5 +77,5 @@ Compuesto por M filas x N columnas
   * Cada uno de los componentes obtenidos (Se obtienen J atributos de este proceso)
   * Para el segmento L (Se obtiene 1 atributo de este proceso)
     * J+1
-  * Por ultimo, se aplica SVD para calcular los valores singulares de la matriz de componentes obtenidos (J) (?)
+  * Por ultimo, se aplica SVD para calcular los valores singulares de la matriz de componentes obtenidos (la S del SVD)
   * Al final deberian obtenerse 2J+1 atributos

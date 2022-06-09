@@ -23,7 +23,6 @@ def train(x,y,param):
 
 # Load data from xData.csv, yData,csv
 def load_data_trn():
-    ....
     return()
     
 # Load parameters for SNN'straining
