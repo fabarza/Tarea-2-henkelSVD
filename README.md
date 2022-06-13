@@ -79,3 +79,10 @@ Compuesto por M filas x N columnas
     * J+1
   * Por ultimo, se aplica SVD para calcular los valores singulares de la matriz de componentes obtenidos (la S del SVD)
   * Al final deberian obtenerse 2J+1 atributos
+
+
+
+
+  # Notas clase
+  * Para la funcion H(X) se utiliza N = N/2
+  * La funcion fft retorna un vector que se debe utilizar para la sumatoria de H(X)
