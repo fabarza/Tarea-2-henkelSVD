@@ -6,48 +6,46 @@ import numpy  as np
 
 # Initialize weights
 def iniWs():    
-    ...
-    return()
+    pass
 
 # Initialize weights for one-layer    
-def iniW(next,prev):
-    r = np.sqrt(6/(next+ prev))
+def iniW(prev, next):
+    r = np.sqrt(6 / (next + prev))
     w = np.random.rand(next,prev)
     w = w*2*r-r    
     return(w)
 
 # Feed-forward of SNN
-def forward():
-    ...    
-    return() 
+def forward(x, W):
+    act = []
+    # Activacion para las capas de entrada y ocultas
+    for i in range(len(W)-1):
+        act.append(act_function(np.dot(W[i], x)))
+    
+    act.append(act_sigmoid(np.dot(W[-1], act[-1]))) # Activacion de la capa de salida
+    return(act) 
 
-#Activation function
+# Activacion para la capa de salida
+def act_sigmoid(x):
+    return(1/(1+np.exp(-x)))
+
+# Funcion de activacion: Tangente hiperbolica
 def act_function(x):
-    ''' Funcion tangente hiperbolica 
-    INPUT: valor de entrada para la funcion tangente hiperbolica
-    OUTPUT: valor de la funcion tangente hiperbolica
-    '''
-    if x == None:
-        print("x value is None")
-    else:
-        tg_h = (exp(x)-exp(-x)) / (exp(x)+exp(x)) 
-        return tg_h
+    return(np.tanh(x))
   
-# Derivate of the activation funciton
+# Derivada de la funcion Tangente hiperbolica
 def deriva_act(x):
-    ''' Derivada de funcion tangente hiperbolica
-    INPUT: valor de entrada para la derivada funcion tangente hiperbolica
-    OUTPUT: valor de la derivada de funcion tangente hiperbolica
-    '''
-    if x == None:
-        print("x value is None")
-    else:
-        tg_h_dv = 1 / ((np.cosh(x))**2) 
-        return tg_h_dv
+    return(1/(1+np.abs(x)))
+    
    
 #Feed-Backward of SNN
-def gradW():    
+def gradW(a, x, W, V):
+    gW = []
+    costo = 0
+    # Gradiente de la capa de salida
+    for i in range(len(W)-1):
         
+
     return()    
 
 # Update Ws

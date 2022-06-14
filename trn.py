@@ -6,8 +6,23 @@ import my_utility as ut
 
 
 #Inicializacion de pesos 
-def iniWs():
-    pass
+def iniWs(x,y,param_snn):
+    W = []
+    V = [0]
+    prev = x.shape[1]
+    # Inicializacion de pesos de la capa de entrada
+    for i in range(3, len(param_snn)):
+        next = param_snn[i]
+        W.append(ut.iniW(prev, next))  # Guardamos los pesos por capa
+        prev = next
+        
+        # Asumo que cuando pide guardar el shape se refiere a la cantidad de filas
+        V.append(W[i-3].shape[0]) # Velocidad (DUDOSO, preguntar al profe)
+        
+    W.append(ut.iniW(prev, y.shape[1])) # Pesos de la capa de salida
+    
+    return (W, V)
+    
 
 #Save weights of the SNN
 def save_w():
@@ -15,17 +30,17 @@ def save_w():
     
 #SNN's Training 
 def snn_train(x,y,param):    
-    W,V,S = iniWs()
+    W,V = iniWs(x,y,param) # Le borre el S ya que creo que se usa para el ADAM
     Costo = []
-    for iter in range(MaxIter):        
-        a       = ut.forward(...)
-        gW,cost = ut.gradW(...)        
-        W,V,S   = ut.updW(...)
+    for iter in range(param[1]):        
+        a       = ut.forward(x, W)
+        gW,cost = ut.gradW(a, x, W, V)
+        W,V  = ut.updW(...)
         Costo.append(Cost)
     return(W,Costo)
 
 # Load data from xData.csv, yData,csv
-def load_data_trn(xData,yData, percentage):
+def load_data_trn(xData,yData, trainPer):
     rng = np.random.default_rng() # Generador de numeros aleatorios para shuffle
     # Lectura de datos
     xe = np.genfromtxt(xData, delimiter=",", dtype=np.float64)
@@ -35,17 +50,18 @@ def load_data_trn(xData,yData, percentage):
     rng.shuffle(xe) # Desordenar las filas
 
     # Separacion de datos de entrenamiento y prueba
-    xe_trn = xe[:int(xe.shape[0]*percentage),:]
-    xe_tst = xe[int(xe.shape[0]*percentage):,:]
+    xe_trn = xe[:int(xe.shape[0]*trainPer),:]
+    xe_tst = xe[int(xe.shape[0]*trainPer):,:]
+
+    # Separo los datos de las etiquetas
+    xe, ye = np.split(xe_trn, [xe_trn.shape[1]-ye.shape[1]], axis=1)
+    xv, yv = np.split(xe_tst, [xe_tst.shape[1]-ye.shape[1]], axis=1)
 
     # Guardamos los archivos de entrenamiento y prueba
-    pd.DataFrame(xe_trn).to_csv("dTrain.csv", index=False, header=False)
-    pd.DataFrame(xe_tst).to_csv("dTest.csv", index=False, header=False)
-
-    # Separo las caracteristicas de las etiquetas
-    xe, ye = np.split(xe_trn, [xe_trn.shape[1]-ye.shape[1]], axis=1)
-
-    exit(0)
+    pd.DataFrame(xe).to_csv("dTrain_x.csv", index=False, header=False)
+    pd.DataFrame(ye).to_csv("dTrain_y.csv", index=False, header=False)
+    pd.DataFrame(xv).to_csv("dTest_x.csv", index=False, header=False)
+    pd.DataFrame(yv).to_csv("dTest_y.csv", index=False, header=False)
     
     return(xe, ye)
     

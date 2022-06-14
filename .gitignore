@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+dTest_x.csv
+dTest_y.csv
+dTrain_x.csv
+dTrain_y.csv
+xData.csv
+xData.csv

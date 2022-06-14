@@ -99,10 +99,22 @@ def binary_label(y):
 
   return(y_bin)
 
-# Data norm 
-# REVISAR SI ESTA BIEN ESTA FUNCION
-def data_norm(x):
-  return (x - np.min(x)) / (np.max(x) - np.min(x))
+# Norm of the data
+def data_norm(X):
+    """
+    Esta funcion se encarga de normalizar los datos.
+    """
+    X = np.array(X)
+    # Constantes
+    a = 0.01
+    b = 0.99
+
+    for i in range(X.shape[1]):
+        # Normalizacion de la columna
+        r = np.min(X[:,i]) - np.max(X[:,i])
+        X[:,i] = (((X[:, i]) - np.min(X[:, i]))  / r) * (b-a) + a
+
+    return (X) # Retorna la matriz normalizada
   
 
 # Save Data from  Hankel's features

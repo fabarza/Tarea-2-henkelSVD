@@ -86,3 +86,4 @@ Compuesto por M filas x N columnas
   # Notas clase
   * Para la funcion H(X) se utiliza N = N/2
   * La funcion fft retorna un vector que se debe utilizar para la sumatoria de H(X)
+  * NO SE USA MINIBATCH
