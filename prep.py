@@ -1,6 +1,6 @@
 import pandas     as pd
 import numpy      as np
-from sympy import false
+import time
 
 
 def hankel_features(par_prep, X):
@@ -141,11 +141,19 @@ def load_cnf_prep():
 
 # Beginning ...
 def main():        
+  # Measure time of function
+    start_time = time.time()
     par_prep    = load_cnf_prep()	
+    print(f"Elapsed time for load_cnf: {time.time() - start_time}")
+    start_time = time.time()
     Data        = load_data("Data_1.csv")	
+    print(f"Elapsed time for load_data: {time.time() - start_time}")
+    start_time = time.time()
     Dinput,Dout = hankel_features(par_prep, Data)
+    print(f"Elapsed time for hankel_features: {time.time() - start_time}")
+    start_time = time.time()
     Dinput      = data_norm(Dinput)
-    print(Dout)
+    print(f"Elapsed time for data_norm: {time.time() - start_time}")
     save_data_features(Dinput,Dout)
 
 
