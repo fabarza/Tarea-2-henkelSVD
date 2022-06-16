@@ -8,19 +8,17 @@ import my_utility as ut
 #Inicializacion de pesos 
 def iniWs(x,y,param_snn):
     W = []
-    V = [0]
+    V = [np.zeros(x.shape[1])]
     prev = x.shape[1]
     # Inicializacion de pesos de la capa de entrada
     for i in range(3, len(param_snn)):
         next = param_snn[i]
         W.append(ut.iniW(prev, next))  # Guardamos los pesos por capa
         prev = next
-        
         # Asumo que cuando pide guardar el shape se refiere a la cantidad de filas
-        V.append(W[i-3].shape[0]) # Velocidad (DUDOSO, preguntar al profe)
-        
+        V.append(np.zeros(W[i-3].shape[0])) # Velocidad (DUDOSO, preguntar al profe)        
     W.append(ut.iniW(prev, y.shape[1])) # Pesos de la capa de salida
-    
+
     return (W, V)
     
 
@@ -32,7 +30,7 @@ def save_w():
 def snn_train(x,y,param):    
     W,V = iniWs(x,y,param) # Le borre el S ya que creo que se usa para el ADAM
     Costo = []
-    for iter in range(param[1]):        
+    for iter in range(param[1]):    
         a       = ut.forward(x, W)
         gW,cost = ut.gradW(a, x, W, V)
         W,V  = ut.updW(...)

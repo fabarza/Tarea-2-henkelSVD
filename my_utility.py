@@ -20,9 +20,10 @@ def forward(x, W):
     act = []
     # Activacion para las capas de entrada y ocultas
     for i in range(len(W)-1):
-        act.append(act_function(np.dot(W[i], x)))
+        act.append(act_function(np.dot(W[i], x.T)).T)
     
-    act.append(act_sigmoid(np.dot(W[-1], act[-1]))) # Activacion de la capa de salida
+    act.append(act_sigmoid(np.dot(W[-1], act[-1].T)).T) # Activacion de la capa de salida
+
     return(act) 
 
 # Activacion para la capa de salida
@@ -31,7 +32,8 @@ def act_sigmoid(x):
 
 # Funcion de activacion: Tangente hiperbolica
 def act_function(x):
-    return(np.tanh(x))
+    mat = np.tanh(x)
+    return(mat)
   
 # Derivada de la funcion Tangente hiperbolica
 def deriva_act(x):
@@ -42,10 +44,13 @@ def deriva_act(x):
 def gradW(a, x, W, V):
     gW = []
     costo = 0
-    # Gradiente de la capa de salida
     for i in range(len(W)-1):
         
+    # Gradiente de la capa de salida
 
+
+    
+        
     return()    
 
 # Update Ws
