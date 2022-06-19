@@ -1,5 +1,8 @@
-# Tarea 2: Matriz de Henkel y SVD
-
+# Autores:
+* Felipe Abarzúa
+* Stephanie Gómez
+* Sergio Gil
+# Tarea 2: Matriz de Henkel y S
 ## Pasos
 1) Crear [matiz de hankel](https://www.wikiwand.com/es/Matriz_de_Hankel) 
 2) SVD de la matriz 

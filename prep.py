@@ -51,9 +51,8 @@ def get_components(mHankel):
   for i in range(0, u.shape[0]):
     uReshape = np.reshape(u[:, i], (u.shape[0],1))
     vtReshape = np.reshape(vt.T[:, i], (1, vt.T.shape[0]))
-    hi = np.dot(uReshape, vtReshape) * s[i] # Calcula la i-esima caracteristica
+    hi = np.matmul(uReshape, vtReshape) * s[i] # Calcula la i-esima caracteristica
     compVector = np.concatenate((hi[0, :], hi[1: , hi.shape[1]-1]), axis=None) # Primera fila + ultima columna
-
     components.append(compVector)
 
   return(components)
@@ -75,7 +74,7 @@ def entropy_spectral(component):
   vectorFourier = np.abs(np.fft.fft(component))
   vectorFourier = vectorFourier[1:vectorFourier.shape[0]//2]
   
-  totalE = np.sum(vectorFourier)
+  totalE = np.sum(np.power(vectorFourier, 2))
 
   for a_k in vectorFourier:
     sum += probabilityFunction(a_k, totalE) * np.log2(probabilityFunction(a_k, totalE))

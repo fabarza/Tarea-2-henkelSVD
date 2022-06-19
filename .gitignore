@@ -133,3 +133,8 @@ dTrain_x.csv
 dTrain_y.csv
 xData.csv
 xData.csv
+cm_snn.csv
+Fsc_snn.csv
+cost_snn.csv
+w_snn.npz
+xData.csv

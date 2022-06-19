@@ -3,38 +3,22 @@
 import pandas     as pd
 import numpy      as np
 import my_utility as ut
-
-
-#Inicializacion de pesos 
-def iniWs(x,y,param_snn):
-    W = []
-    V = [np.zeros(x.shape[1])]
-    prev = x.shape[1]
-    # Inicializacion de pesos de la capa de entrada
-    for i in range(3, len(param_snn)):
-        next = param_snn[i]
-        W.append(ut.iniW(prev, next))  # Guardamos los pesos por capa
-        prev = next
-        # Asumo que cuando pide guardar el shape se refiere a la cantidad de filas
-        V.append(np.zeros(W[i-3].shape[0])) # Velocidad (DUDOSO, preguntar al profe)        
-    W.append(ut.iniW(prev, y.shape[1])) # Pesos de la capa de salida
-
-    return (W, V)
     
 
 #Save weights of the SNN
-def save_w():
-    pass 
+def save_w(W, cost):
+    np.savez("w_snn.npz", W=W)
+    np.savetxt("cost_snn.csv", cost, delimiter=",", fmt="%f")
     
 #SNN's Training 
 def snn_train(x,y,param):    
-    W,V = iniWs(x,y,param) # Le borre el S ya que creo que se usa para el ADAM
+    W,V = ut.iniWs(x,y,param) # Le borre el S ya que creo que se usa para el ADAM
     Costo = []
     for iter in range(param[1]):    
         a       = ut.forward(x, W)
-        gW,cost = ut.gradW(a, x, W, V)
-        W,V  = ut.updW(...)
-        Costo.append(Cost)
+        gW,cost = ut.gradW(a, x, y, W)
+        W,V  = ut.updW(gW,W, V, param[2])
+        Costo.append(cost)
     return(W,Costo)
 
 # Load data from xData.csv, yData,csv
@@ -56,12 +40,12 @@ def load_data_trn(xData,yData, trainPer):
     xv, yv = np.split(xe_tst, [xe_tst.shape[1]-ye.shape[1]], axis=1)
 
     # Guardamos los archivos de entrenamiento y prueba
-    pd.DataFrame(xe).to_csv("dTrain_x.csv", index=False, header=False)
-    pd.DataFrame(ye).to_csv("dTrain_y.csv", index=False, header=False)
-    pd.DataFrame(xv).to_csv("dTest_x.csv", index=False, header=False)
-    pd.DataFrame(yv).to_csv("dTest_y.csv", index=False, header=False)
-    
-    return(xe, ye)
+    pd.DataFrame(xe.T).to_csv("dTrain_x.csv", index=False, header=False)
+    pd.DataFrame(ye.T).to_csv("dTrain_y.csv", index=False, header=False)
+    pd.DataFrame(xv.T).to_csv("dTest_x.csv", index=False, header=False)
+    pd.DataFrame(yv.T).to_csv("dTest_y.csv", index=False, header=False)
+
+    return(xe.T, ye.T)
     
 # Load parameters for SNN'straining
 def load_cnf_snn(filename):
