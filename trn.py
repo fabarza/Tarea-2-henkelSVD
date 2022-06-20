@@ -1,3 +1,8 @@
+# Autores
+# Felipe Abarzúa
+# Stephanie Gómez
+# Sergio Gil
+
 # SNN's Training :
 
 import pandas     as pd
@@ -14,9 +19,10 @@ def save_w(W, cost):
 def snn_train(x,y,param):    
     W,V = ut.iniWs(x,y,param) # Le borre el S ya que creo que se usa para el ADAM
     Costo = []
-    for iter in range(param[1]):    
+    for iter in range(param[1]):
         a       = ut.forward(x, W)
         gW,cost = ut.gradW(a, x, y, W)
+        print(f"Iteracion {iter+1} : Costo = {cost}")
         W,V  = ut.updW(gW,W, V, param[2])
         Costo.append(cost)
     return(W,Costo)

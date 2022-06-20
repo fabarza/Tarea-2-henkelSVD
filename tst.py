@@ -1,3 +1,8 @@
+# Autores
+# Felipe Abarzúa
+# Stephanie Gómez
+# Sergio Gil
+
 import pandas as pd
 import numpy as np
 import my_utility as ut
@@ -18,11 +23,12 @@ def load_data_test(fileX, fileY):
     
 # Beginning ...
 def main():			
-	xv,yv  = load_data_test("dTest_x.csv", "dTest_y.csv")
-	W      = load_w_snn("w_snn.npz")
-	zv     = ut.forward(xv,W)      		
-	cm,Fsc = ut.metricas(yv,zv[-1]) 	
-	save_measure(cm,Fsc)
+    xv,yv  = load_data_test("dTest_x.csv", "dTest_y.csv")
+    W      = load_w_snn("w_snn.npz")
+    zv     = ut.forward(xv,W)      		
+    cm,Fsc = ut.metricas(yv,zv[-1])
+    print(f"F-Score: {Fsc}")
+    save_measure(cm,Fsc)
 		
 
 if __name__ == '__main__':   

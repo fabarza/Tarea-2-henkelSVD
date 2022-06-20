@@ -1,3 +1,8 @@
+# Autores
+# Felipe Abarzúa
+# Stephanie Gómez
+# Sergio Gil
+
 import pandas     as pd
 import numpy      as np
 import time
@@ -77,6 +82,7 @@ def entropy_spectral(component):
   totalE = np.sum(np.power(vectorFourier, 2))
 
   for a_k in vectorFourier:
+    # suma de A_k^2 / energiaTotal
     sum += probabilityFunction(a_k, totalE) * np.log2(probabilityFunction(a_k, totalE))
 
   entropy = (-1/np.log2(vectorFourier.shape[0])) * sum
@@ -85,6 +91,7 @@ def entropy_spectral(component):
   
 # Funcion de probabilidad para la entropia
 def probabilityFunction(a_k ,totalEnergy):
+  # A_k^2 / energiaTotal
   return(np.power(a_k, 2)/ totalEnergy)
 
 
@@ -152,19 +159,19 @@ def load_cnf_prep():
 
 # Beginning ...
 def main():        
-  # Measure time of function
+  # Medida de tiempo para la funcion
     start_time = time.time()
     par_prep    = load_cnf_prep()	
-    print(f"Elapsed time for load_cnf: {time.time() - start_time}")
+    print(f"Tiempo para load_cnf: {time.time() - start_time}")
     start_time = time.time()
-    Data        = load_data("Data_1.csv")	
-    print(f"Elapsed time for load_data: {time.time() - start_time}")
+    Data        = load_data("Data_2.csv")	
+    print(f"Tiempo para for load_data: {time.time() - start_time}")
     start_time = time.time()
     Dinput,Dout = hankel_features(par_prep, Data)
-    print(f"Elapsed time for hankel_features: {time.time() - start_time}")
+    print(f"Tiempo para for hankel_features: {time.time() - start_time}")
     start_time = time.time()
     Dinput      = data_norm(Dinput)
-    print(f"Elapsed time for data_norm: {time.time() - start_time}")
+    print(f"Tiempo para for data_norm: {time.time() - start_time}")
     save_data_features(Dinput,Dout)
 
 

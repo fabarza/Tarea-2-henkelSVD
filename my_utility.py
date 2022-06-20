@@ -125,10 +125,11 @@ def metricas(x,y):
     fn = np.sum(cm, axis=1) - tp
     tp_rate = tp / (tp + fn)
     tn_rate = tn / (tn + fp)
-    fp_rate = fp / (fp + tn)
-    fn_rate = fn / (fn + tp)
 
     fscore = 2 * tp_rate * tn_rate / (tp_rate + tn_rate)
+    # Promedio del fscore
+    mFscore = np.mean(fscore)
+    fscore = np.append(fscore, mFscore)
 
     return(cm, fscore)
     
